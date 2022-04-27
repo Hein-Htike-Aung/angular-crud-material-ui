@@ -1,0 +1,53 @@
+<h1 mat-dialog-title>{{ productForm.value.id ? 'Edit':'Add' }} Product</h1>
+<div mat-dialog-content>
+  <form [formGroup]="productForm">
+    <mat-form-field appearance="legacy" color="accent">
+      <mat-label>Product Name</mat-label>
+      <input matInput formControlName="productName" placeholder="Name" />
+    </mat-form-field>
+    <mat-form-field appearance="legacy" color="accent">
+      <mat-label>Product Category</mat-label>
+      <mat-select formControlName="category" placeholder="Category">
+        <mat-option value="Fruit">Fruit</mat-option>
+        <mat-option value="Vegetable">Vegetable</mat-option>
+        <mat-option value="Electronic">Electronic</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Choose a date</mat-label>
+      <input formControlName="date" matInput [matDatepicker]="picker" />
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <label><h3>Product Freshness</h3></label>
+    <section class="example-section">
+      <mat-radio-group formControlName="freshness">
+        <mat-radio-button
+          *ngFor="let f of freshnessList"
+          class="example-margin"
+          [value]="f"
+          >{{ f }}</mat-radio-button
+        >
+      </mat-radio-group>
+    </section>
+    <mat-form-field appearance="legacy" color="accent">
+      <mat-label>Price</mat-label>
+      <input
+        matInput
+        formControlName="price"
+        type="number"
+        placeholder="Price"
+      />
+    </mat-form-field>
+    <mat-form-field appearance="legacy" color="accent">
+      <mat-label>Comment</mat-label>
+      <textarea formControlName="comment" matInput></textarea>
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions [align]="'end'">
+  <button mat-button mat-dialog-close>Close</button>
+  <button style="margin-left: 8px" (click)="save()" mat-raised-button>
+    {{ productForm.value.id ? "Edit" : "Add" }}
+  </button>
+</div>
